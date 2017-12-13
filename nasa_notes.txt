@@ -1,0 +1,220 @@
+> dotchart(nasa$Temp, labels=row.names(nasa$Temp), cex=.7,main="Global Temperatures", xlab="Temperature")
+
+> hist(nasa$Temp, breaks=300, xlab="Temperature", main="Global Temperatures")
+
+> hist(nasa$Temp, breaks=5, xlab="Temperature", main="Global Temperatures")
+
+> hist(nasa$J.D, breaks=5, main="Annual Temperatures", xlab="Temperature", ylab="Frequency", col="gray")
+
+--
+
+
+> dotchart(nasa$J.D, cex=.7, pt.cex=1.5, main="Annual Average Surface Temperatures", xlab="Temperature (Celsius)", col="green",pch=19)
+
+
+***
+> x <- nasa$J.D
+> y <- nasa$Year
+> data <- as.data.frame(cbind(x,y))
+> plot(data, xlab="Annual Average Temperature", ylab="Year")
+> plot(data, xlab="Annual Average Temperature", ylab="Year", cex=1)
+> plot(data, xlab="Annual Average Temperature", ylab="Year", cex=1, col="green")
+> plot(data, xlab="Annual Average Temperature (Celsius)", ylab="Year", cex=2, col="green", pch=20, main="Annual Average Surface Temperature Since 1880")
+***
+
+
+***
+> hist(nasa$J.D, breaks=20, main="Annual Average Surface Temperature Since 1880",xlab="Temperature", col="green")
+***
+
+***
+> ggplot(nasa, aes(x=J.D, y=Year, color=Year)) + geom_point(aes(colour=Year)) + scale_color_gradient(low="green")
+> nasaplot1 <- ggplot(nasa, aes(x=J.D, y=Year, color=Year)) + geom_point(aes(colour=Year)) + scale_color_gradient(low="green")
+> print(nasaplot1 + ggtitle("Annual Average Surface Temperature Since 1880"))
+> print(nasaplot1 + ggtitle("Annual Average Surface Temperature Since 1880") + labs(x="Temperature (Celsius)"))
+***
+
+***
+> ggplot(nasa, aes(x=J.D, y=Year, color=Year)) + geom_point(aes(colour=Year)) + scale_color_gradient(low="green") + geom_smooth(color="red" ,linetype=1, alpha=0)
+> nasaplot1 <- ggplot(nasa, aes(x=J.D, y=Year, color=Year)) + geom_point(aes(colour=Year)) + scale_color_gradient(low="green") + geom_smooth(color="red" ,linetype=1, alpha=0)
+> print(nasaplot1 + ggtitle("Annual Average Surface Temperature Since 1880"))
+> print(nasaplot1 + ggtitle("Annual Average Surface Temperature Since 1880") + labs(x="Temperature (Celsius)"))
+***
+
+> barplot(table(nasa$J.D),col="green",main="Distribution of Annual Average Temperatures",xlab="Annual Average Temperature",ylab="Amount")
+
+***
+plot(density((nasa$J.D),na.rm=TRUE,adjust=.5),main="Distribution of Annual Average Temperatures",xlab="Temperature")
+> plot(density(log10(nasa$J.D),na.rm=TRUE,adjust=.5),main="Distribution of Annual Average Temperatures")
+> rug(log10(nasa$J.D),na.rm=TRUE)
+***
+
+*****
+> a <- nasa2$Year
+> SHem <- nasa2$SHem
+> NHem <- nasa2$NHem
+> df <- data.frame(NHem,SHem,a)
+> df <- melt(df, id.vars='a')
+> ggplot(df, aes(x=a, y=value, fill=variable)) + geom_bar(stat='identity', position='dodge') + xlab("Year") + ylab("Annual Average Temperature") + ggtitle("Northern & Southern Hemisphere Temperature")
+> ggplot(df, aes(x=a, y=value, fill=variable, colour=variable)) + geom_line(size=1) + xlab("Year") + ylab("Annual Average Temperature") + ggtitle("Northern & Southern Hemisphere Temperature")
+*****
+
+
+
+
+> ggplot(nasa, aes(x=(J.D), fill=J.D)) + geom_density(alpha=.5, color="green",na.rm=TRUE)
+> ggplot(nasa, aes(x=log10(J.D), fill=J.D)) + geom_density(alpha=.5, color="green",na.rm=TRUE)
+
+> points(Home.Value~Date, col="blue", data=subset(housing,State=="TX"))
+> plot(Home.Value~Date, data=subset(housing, State=="MA")
++ plot(Home.Value~Date, data=subset(housing,State=="MA"))
+Error: unexpected symbol in:
+"plot(Home.Value~Date, data=subset(housing, State=="MA")
+plot"
+> plot(Home.Value~Date, data=subset(housing,State=="MA"))
+
+
+> ggplot(hp2001Q1, aes(y=Structure.Cost, x=Land.Value)) + geom_point()
+> ggplot(hp2001Q1, aes(y=Structure.Cost, x=log(Land.Value))) + geom_point()
+> points(Home.Value~Date, col="blue", data=subset(housing,State=="TX"))
+> points(Home.Value~Date, col="red", data=subset(housing,State=="TX"))
+> legend(1975, 40000, c("MA", "TX"), title="State", col=c("black","red"), pch=c(1,1))
+> legend(1975, 400000, c("MA", "TX"), title="State", col=c("black","red"), pch=c(1,1))
+> plot(Home.Value~Date, data=subset(housing,State=="MA"))
+> points(Home.Value~Date, col="red", data=subset(housing,State=="TX"))
+> legend(1975, 400000, c("MA", "TX"), title="State", col=c("black","red"), pch=c(1,1))
+> legend(1975, 400000, c("MA", "TX"), title="State", col=c("black","red"), pch=c(1,2))
+> points(Home.Value~Date, col="red" pch=2, data=subset(housing,State=="TX"))
+Error: unexpected symbol in "points(Home.Value~Date, col="red" pch"
+> points(Home.Value~Date, col="red", pch=2, data=subset(housing,State=="TX"))
+> points(Home.Value~Date, col="red", pch=7, data=subset(housing,State=="TX"))
+> points(Home.Value~Date, col="red", pch=1, data=subset(housing,State=="TX"))
+> ggplot(subset(housing, State %in% c("MA", "TX")), aes(x=Date, y=Home.Value, color=State)) + geom_point()
+
+
+> d <- ggplot(diamonds, aes(x=carat, y=price))
+> d + geom_point()
+> d + geom_point(aes(colour=carat)) + scale_color_distiller()
+
+
+
+
+
+
+
+
+
+
+---
+title: "NASA_GISS_Kyle_Hampton"
+author: "Kyle Hampton"
+date: "September 22, 2017"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# NASA GISS Surface Temperature Assignment Background
+
+The Goddard Institute for Space Studies (GISS) at the National Aeronautics and Space Administration (NASA) publishes captured surface temperature data to identify changes in global surface temperature. 
+
+For additional background on the published surface temperature data NASA states the following, "We update the Goddard Institute for Space Studies (GISS) analysis of global surface temperature change, compare alternative analyses, and address questions about perception and reality of global warming. Satellite-observed nightlights are used to identify measurement stations located in extreme darkness and adjust temperature trends of urban and peri-urban stations for non-climatic factors, verifying that urban effects on analyzed global change are small." [1]
+
+As recommended by NASA, a good portion of my analysis focuses on 12-month, average surface temperatures.  Per NASA, "We suggest use of 12-month (and n×12) running mean temperature to fully remove the annual cycle and improve information content in temperature graphs." [1]
+
+This assignment includes two data sets.  The first data set captures annual and monthly global surface temperature data, including averages, for every year from 1880 to 2015. I refer to this data set as the annual surface temperature data. The second data set captures annual global surface temperature data the northern and southern hemispheres as well as at specific latitude and longitude coordinates.  I refer to this data set as location-specific surface temperature data.
+
+# Assignment Plots & Visualizations
+
+### Plot: Annual Average Surface Temperature Since 1880
+
+Plot Context...
+
+```{r}
+library(readr)
+nasa <- read_csv("C:/Users/kyleh/Google Drive UNO/UNO/Fall 2017/ISQA 8086/Assignment 1/NASA GISS Assignment/NASA-GISTEMP-DataCSV.csv")
+x <- nasa$J.D
+y <- nasa$Year
+data <- as.data.frame(cbind(x,y))
+plot(data, xlab="Annual Average Temperature (Celsius)", ylab="Year", cex=2, col="green", pch=20, main="Annual Average Surface Temperature Since 1880")
+```
+
+
+
+### Histogram: Annual Average Surface Temperature Since 1880
+
+Plot Context...
+
+```{r}
+hist(nasa$J.D, breaks=20, main="Annual Average Surface Temperature Since 1880",xlab="Temperature", col="green")
+```
+
+
+
+### GGPlot 1: Annual Average Surface Temperature Since 1880
+
+Plot Context...
+
+```{r}
+library(ggplot2)
+nasaplot1 <- ggplot(nasa, aes(x=J.D, y=Year, color=Year)) + geom_point(aes(colour=Year)) + scale_color_gradient(low="green")
+print(nasaplot1 + ggtitle("Annual Average Surface Temperature Since 1880") + labs(x="Temperature (Celsius)"))
+```
+
+
+
+### GGPlot 2: Annual Average Surface Temperature Since 1880 With Smoothing Curve
+
+Plot Context...
+
+```{r}
+library(ggplot2)
+nasaplot1 <- ggplot(nasa, aes(x=J.D, y=Year, color=Year)) + geom_point(aes(colour=Year)) + scale_color_gradient(low="green") + geom_smooth(color="red" ,linetype=1, alpha=0)
+print(nasaplot1 + ggtitle("Annual Average Surface Temperature Since 1880") + labs(x="Temperature (Celsius)"))
+```
+
+
+
+### Plots: Distribution of Annual Average Temperatures
+
+Plot Context...
+
+```{r}
+plot(density(log10(nasa$J.D),na.rm=TRUE,adjust=.5),main="Distribution of Annual Average Temperatures")
+```
+
+Plot Context...
+
+```{r}
+plot(density(log10(nasa$J.D),na.rm=TRUE,adjust=.5),main="Distribution of Annual Average Temperatures")
+rug(log10(nasa$J.D),na.rm=TRUE)
+```
+
+
+
+### GGPlot: Hemisphere Annual Average Surface Temperatures Since 1880
+
+Plot Context...
+
+```{r}
+options(repos=structure(c(CRAN="https://cran.cnr.berkeley.edu/")))
+nasa2 <- read_csv("C:/Users/kyleh/Google Drive UNO/UNO/Fall 2017/ISQA 8086/Assignment 1/NASA GISS Assignment/NASA-GISTEMP-Data2CSV.csv")
+install.packages("reshape")
+library(reshape)
+a <- nasa2$Year
+SHem <- nasa2$SHem
+NHem <- nasa2$NHem
+df <- data.frame(NHem,SHem,a)
+df <- melt(df, id.vars='a')
+ggplot(df, aes(x=a, y=value, fill=variable, colour=variable)) + geom_line(size=1) + xlab("Year") + ylab("Annual Average Temperature") + ggtitle("Northern & Southern Hemisphere Temperature")
+```
+
+
+# Assignment Conclusions
+
+
+# References
+
+[1] Hansen, J., R. Ruedy, M. Sato, and K. Lo, 2010: Global surface temperature change. Rev. Geophys., 48, RG4004, doi:10.1029/2010RG000345.
